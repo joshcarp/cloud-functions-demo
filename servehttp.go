@@ -14,12 +14,12 @@ import (
 
 func ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	name := r.URL.Query().Get("name")
-	w.Write([]byte("Hello, " + name))
-	bucket := os.Getenv("bucketName")
-	latest, _ := download(bucket, "latest")
-	if latest != nil {
+	w.Write([]byte("Hello, " + name + "\n"))
+	bucket := os.Getenv("bucket")
+	latest, err := download(bucket, "latest")
+	if err == nil {
 		latestBytes, _ := ioutil.ReadAll(latest)
-		w.Write([]byte("Latest hello was to\\"))
+		w.Write([]byte("Latest hello was to\n"))
 		w.Write(latestBytes)
 	} else {
 		w.Write([]byte("You're the first one!\n"))
