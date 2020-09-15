@@ -19,7 +19,7 @@ func ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	latest, err := download(bucket, "latest")
 	if err == nil {
 		latestBytes, _ := ioutil.ReadAll(latest)
-		w.Write([]byte("Latest hello was to\n"))
+		w.Write([]byte("Latest hello was to"))
 		w.Write(latestBytes)
 	} else {
 		w.Write([]byte("You're the first one!\n"))
