@@ -3,6 +3,7 @@ package cloudfunctionsdemo
 import (
 	"context"
 	"fmt"
+	"github.com/joshcarp/cloudfunctionsdemo/foo"
 	"io"
 	"io/ioutil"
 	"net/http"
@@ -24,6 +25,7 @@ func ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	} else {
 		w.Write([]byte("You're the first one!\n"))
 	}
+	foo.CallDep()
 	upload(bucket, "latest", strings.NewReader(name))
 }
 
